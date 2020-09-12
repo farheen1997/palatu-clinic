@@ -22,4 +22,9 @@ node {
         bat(/cd target/)
         bat(/dir/)
       }
+
+       stage('sending mail') {
+        emailext body: 'Build has been created ', subject: 'Build Status ', to: 'azalkhan16@gmail.com'
+        emailextrecipients([developers(azalkhan16@gmail.com), culprits(salmanmansuri18@gmail.com)])
+      }
 }
