@@ -1,8 +1,10 @@
 node {
    
     stage('Preparation') { // for display purposes
+
+        sh "rm -rf *"
         // Get some code from a GitHub repository
-       git branch: 'feature/frist-branch', credentialsId: 'f0e3f95e-2151-4024-a7eb-bc7aee3bb834', url: 'https://github.com/farheen1997/palatu-clinic.git'
+       git credentialsId: 'f0e3f95e-2151-4024-a7eb-bc7aee3bb834', url: 'https://github.com/farheen1997/palatu-clinic.git'
         // Get the Maven tool.
         // ** NOTE: This 'M3' Maven tool must be configured
         // **       in the global configuration.
@@ -15,5 +17,9 @@ node {
     stage('Results') {
         
         sh "ls -lrt /var/lib/jenkins/workspace/pipeline-palatu-clinic/target"
+    }
+    stage('deploy to tomcat')
+    {
+        deploy adapters: [tomcat8(credentialsId: '4e1d4bda-0204-404b-b60b-ca77ecca4686', path: '', url: 'http://13.235.16.130:8080')], contextPath: null, war: '"**/*.war"'
     }
 }
