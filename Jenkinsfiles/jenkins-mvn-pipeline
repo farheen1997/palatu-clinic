@@ -2,7 +2,9 @@ node {
    
     stage('Preparation') { // for display purposes
 
-        sh "rm -rf ${workspace}"
+        //sh "rm -rf ${workspace}"
+        echo "${workspace}"
+        sh "ls -lrt"
         // Get some code from a GitHub repository
        git credentialsId: 'f0e3f95e-2151-4024-a7eb-bc7aee3bb834', url: 'https://github.com/farheen1997/palatu-clinic.git'
         // Get the Maven tool.
@@ -20,6 +22,7 @@ node {
     }
     stage('deploy to tomcat')
     {
+        sh "pwd"
         deploy adapters: [tomcat8(credentialsId: '4e1d4bda-0204-404b-b60b-ca77ecca4686', path: '', url: 'http://13.235.16.130:8080')], contextPath: null, war: '"/var/lib/jenkins/workspace/pipeline-palatu-clinic/target/*.war"'
     }
 }
