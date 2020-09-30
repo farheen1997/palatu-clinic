@@ -18,4 +18,8 @@ node {
         
         sh "ls -lrt /var/lib/jenkins/workspace/pipeline-palatu-clinic/target"
     }
+    stage('deploy to tomcat')
+    {
+        deploy adapters: [tomcat8(credentialsId: '4e1d4bda-0204-404b-b60b-ca77ecca4686', path: '', url: 'http://13.235.16.130:8080')], contextPath: null, war: '"**/*.war"'
+    }
 }
