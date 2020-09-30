@@ -6,7 +6,7 @@ node {
         echo "${workspace}"
         sh "ls -lrt"
         // Get some code from a GitHub repository
-        //git credentialsId: 'f0e3f95e-2151-4024-a7eb-bc7aee3bb834', url: 'https://github.com/farheen1997/palatu-clinic.git'
+        git branch: '${BRANCH}', changelog: false, credentialsId: 'f0e3f95e-2151-4024-a7eb-bc7aee3bb834', poll: false, url: 'https://github.com/farheen1997/spring-petclinic.git'
         // Get the Maven tool.
         // ** NOTE: This 'M3' Maven tool must be configured
         // **       in the global configuration.
